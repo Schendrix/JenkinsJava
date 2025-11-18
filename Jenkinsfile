@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "your-dockerhub-username/simple-web-app"
-        IMAGE_TAG = "${env.BUILD_NUMBER}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
