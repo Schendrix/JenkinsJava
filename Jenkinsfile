@@ -1,11 +1,11 @@
 pipeline {
-    agent {
-        docker { image 'maven:3.9.3-eclipse-temurin-20' }
-    }
+    agent any
+
     environment {
         IMAGE_NAME = "schender21/simple-web-app"
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
+
     stages {
         stage('Checkout') {
             steps {
@@ -13,15 +13,9 @@ pipeline {
             }
         }
 
-        stage('Build JAR') {
-            steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
+                sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ./Java_App"
             }
         }
 
@@ -46,7 +40,7 @@ pipeline {
 
     post {
         always {
-            cleanWs() // This is outside the stages block
+            cleanWs()
         }
     }
 }
