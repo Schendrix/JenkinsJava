@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.9.3-eclipse-temurin-20'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
 
     environment {
         IMAGE_NAME = "schender21/simple-web-app"
