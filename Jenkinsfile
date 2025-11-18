@@ -42,11 +42,11 @@ pipeline {
                 sh "docker run -d -p 8081:8080 --name simple-web-app $IMAGE_NAME:$IMAGE_TAG"
             }
         }
+    }
 
     post {
         always {
-            cleanWs() // Clean workspace after build
+            cleanWs() // This is outside the stages block
         }
-    }
     }
 }
