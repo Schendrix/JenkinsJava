@@ -1,12 +1,17 @@
 pipeline {
-    agent any
-
+    agent {
+        docker { image 'maven:3.9.3-eclipse-temurin-20' }
+    }
     environment {
         IMAGE_NAME = "schender21/simple-web-app"
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
-
     stages {
+        stage('Build JAR') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Schendrix/JenkinsJava.git'
