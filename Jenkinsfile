@@ -1,10 +1,15 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "schender21/simple-web-app"
+        IMAGE_TAG = "${env.BUILD_NUMBER}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/yourusername/yourrepo.git'
+                git branch: 'main', url: 'https://github.com/Schendrix/JenkinsJava.git'
             }
         }
 
