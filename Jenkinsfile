@@ -7,11 +7,6 @@ pipeline {
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
     stages {
-        stage('Build JAR') {
-            steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Schendrix/JenkinsJava.git'
